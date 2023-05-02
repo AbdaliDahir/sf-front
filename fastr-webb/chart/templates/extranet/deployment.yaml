@@ -1,0 +1,96 @@
+{{/******************************************************************************
+   *  FAST ACTS                                                                 *
+   ******************************************************************************
+   * The template set the deployment resource on Kubernetes                     *
+   * for the service.                                                           *
+   *                                                                            *
+   * Change following two variables to set the app name                         *
+   *                                                                            *
+   ******************************************************************************/}} 
+
+{{-  $app := printf "extranet" -}}
+{{-  $values := .Values.fastr.extranet -}}
+
+{{/******************************************************************************
+   * You must change the app variable with the name of the service. For         *
+   * example, "cases", "billing", "clients", ....                               *
+   *                                                                            *
+   * You must change the values variable with the name of the service. For      *
+   * example: .Values.fastr.cases, .Values.fastr.billing,                       *
+   * .Values.fastr.clients, ....                                                *
+   ******************************************************************************/}} 
+
+{{-  $serviceName := printf "%s.%s.%s" "fastr" $app "fullname" -}}
+{{-  $labelsFnc := printf "%s.%s.%s" "fastr" $app "labels" -}}
+{{-  $matchLabelsFnc := printf "%s.%s.%s" "fastr" $app "matchLabels" -}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include $serviceName . }}
+  labels:
+{{ include $labelsFnc . | indent 4 }}
+spec:
+  replicas: {{ $values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include $matchLabelsFnc . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        ref_siroco: {{ .Values.siroco }}
+        {{- include $labelsFnc . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      restartPolicy: {{ .Values.restartPolicy }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ $values.image.repository }}/{{ $values.image.subRepository }}/{{ $values.image.name }}:{{ .Values.tag }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          env:
+            - name: spring_profiles_active
+              value: {{ .Values.environment }}
+          ports:
+            - name: http
+              containerPort: {{ $values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ $values.liveness.path }}
+              port: {{ $values.service.port }}
+          {{- if $values.liveness.initialDelaySeconds }}
+            initialDelaySeconds: {{ $values.liveness.initialDelaySeconds }}
+          {{- end }}
+          {{- if $values.liveness.timeoutSeconds }}
+            timeoutSeconds: {{ $values.liveness.timeoutSeconds }}
+          {{- end }}
+          {{- if $values.liveness.failureThreshold }}
+            failureThreshold: {{ $values.liveness.failureThreshold }}
+          {{- end }}
+          readinessProbe:
+            httpGet:
+              path: {{ $values.readiness.path }}
+              port: {{ $values.service.port }}
+          {{- if $values.readiness.initialDelaySeconds }}
+            initialDelaySeconds: {{ $values.readiness.initialDelaySeconds }}
+          {{- end }}
+          {{- if $values.readiness.periodSeconds }}
+            periodSeconds: {{$values.readiness.periodSeconds }}
+          {{- end }}
+          resources:
+            {{- toYaml $values.resources | nindent 12 }}
+      {{- with $values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with $values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with $values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

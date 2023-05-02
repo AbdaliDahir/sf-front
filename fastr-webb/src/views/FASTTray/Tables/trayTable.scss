@@ -1,0 +1,55 @@
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+.detailed-tray-body {
+
+  & > .react-bootstrap-table {
+
+    overflow-y: auto;
+    margin-top : 0;
+    height: 70vh;
+
+    & > table > thead > tr > th {
+
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: #f1f1f1;
+
+    }
+
+  }
+
+}
+
+.filter-select select{
+  width: 80px !important;
+}
+.initial-filter-border {
+  border: solid 2px #ffc500 !important;
+}
+.case-action {
+  &-cell{
+    display: inline-block;
+    text-decoration: underline;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  &-tooltips{
+    max-width: fit-content !important;
+    background-color: map-get($colors,"white") ;
+    color: map-get($blues,"400");
+    &-popper{
+      opacity: 2 !important;
+    }
+    &-child{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      &-title{
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.eventtimelines__regul-popover{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  &>*{
+    display: flex;
+    span{
+      margin-right: 0.5rem;
+    }
+  }
+}

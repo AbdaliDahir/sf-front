@@ -1,0 +1,47 @@
+// Action History Stylesheet
+
+.action-detail-table tr {
+  text-align: center;
+}
+.action-detail-header, .action-detail-list tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+.action-detail-list {
+  display: block;
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+}
+.td-comment {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.width-25 {
+  width: 25%;
+}
+.width-5 {
+  width: 5%;
+}
+
+/* ActionsHistoryModal */
+.modal-content > .modal-header {
+  background-color: #F1F1F1F1;
+  border-bottom: solid #ddd 1px;
+}
+.modal-content > .modal-body {
+  padding-left: 0!important;
+  padding-right: 0!important;
+  padding-top: 0;
+}
+.modal-content > .modal-body > .action-body {
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+.timeline-container {
+  padding-left: 3%;
+  padding-right: 3%;
+}

@@ -1,0 +1,12 @@
+ .error-text {
+   width: 100%;
+   margin-top: .25rem;
+   font-size: 80%;
+   color: #DA3832;
+  }
+  .block-date-input .react-datepicker-wrapper {
+    display: block;
+  }
+.mt-minus-1 {
+  margin-top: -.25rem;
+}

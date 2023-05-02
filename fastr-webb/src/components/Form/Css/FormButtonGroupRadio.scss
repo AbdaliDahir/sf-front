@@ -1,0 +1,14 @@
+.form-button-group-radio__long-button-container button{
+  border-radius: 0;
+}
+.form-button-group-radio__long-button-container > :first-child {
+  button{
+    border-radius: 0.7125rem 0 0 0.7125rem;
+  }
+}
+
+.form-button-group-radio__long-button-container > :last-child{
+  button{
+    border-radius: 0 0.7125rem 0.7125rem 0;
+  }
+}

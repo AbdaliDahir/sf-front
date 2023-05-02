@@ -1,0 +1,11 @@
+$header-height: 46px;
+$bloc-ligne-height: 81px;
+$tabs-height: 33px;
+$fixed-header-height: calc(#{$header-height} + #{$bloc-ligne-height} + #{$tabs-height});
+$marron: #4E2D2D;
+$marron-fonce: #311C1C;
+$new-red: #D93833;
+$dashboard-width: 408px;
+$dashboard-left-width: 160px;
+$dashboard-right-width: 232px;
+$red-1: #C00404;

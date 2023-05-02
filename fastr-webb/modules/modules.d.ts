@@ -1,0 +1,15 @@
+declare module 'intl';
+declare module 'intl-locales-supported';
+declare module 'react-code-input';
+declare module 'react-bootstrap-table-next';
+declare module 'react-bootstrap-table2-filter';
+declare module 'react-bootstrap-table2-paginator';
+declare module 'react-notifications';
+declare module 'react-block-ui';
+declare module 'react-block-ui/redux';
+declare module 'react-block-ui/reduxMiddleware';
+declare module 'react-loaders';
+declare module 'libphonenumber-js';
+declare module 'datepicker';
+declare module 'i18n-iso-countries';
+declare module 'react-reveal';

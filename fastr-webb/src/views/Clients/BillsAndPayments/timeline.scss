@@ -1,0 +1,84 @@
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+
+.timeline-container {
+  .vertical-timeline {
+    padding-left: 0;
+
+    ul > *:not(.dropdown-menu) {
+      position: relative;
+    }
+
+    li,.timeline--list {
+      list-style-type: none;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    & > *:not(.v-timeline-icon) {
+      padding-left: 15px;
+    }
+
+    .row {
+      border-bottom: solid 1px rgba(112, 112, 112, 0.15);
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+
+    .v-timeline-icon {
+      &:before {
+        content: ' ';
+        height: 12px;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        width: 12px;
+        border-radius: 50%;
+        border: solid 2px $primary;
+        background: white;
+        z-index: 401;
+      }
+
+      &:after {
+        content: ' ';
+        border-left: solid 2px $primary;
+        display: inline-block;
+        position: absolute;
+        left: 5px;
+        height: 2000px;
+        z-index: 400;
+        top: 0;
+      }
+
+      &.v-first {
+        &:after {
+          top: 16px;
+        }
+
+        &.v-last {
+          &:after {
+            height: 0;
+          }
+        }
+      }
+
+      &.v-last {
+        &:after {
+          height: 16px;
+        }
+      }
+
+      &.v-not {
+        &:before {
+          color: green;
+        }
+      }
+
+      &.v-line-color {
+        &:after {
+          border-left: 2px dashed grey;
+        }
+      }
+    }
+  }
+}

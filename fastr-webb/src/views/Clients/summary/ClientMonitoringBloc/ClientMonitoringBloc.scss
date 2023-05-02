@@ -1,0 +1,62 @@
+.summary-client-monitoring-container {
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px #00000069;
+    .title {
+        height: 39px;
+        background: #F3F3F6;
+        .text {
+            font-size: 12px;
+            font-weight: 600;
+        } 
+    }
+    .timeline {
+        height: 145px;
+        overflow-y: hidden;
+        .totalDiscount {
+            position: absolute;
+            bottom: 0;
+            justify-content: space-between;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        } 
+    }
+    .timeline.timeline-dark ol {
+        height: 100px;
+        padding: 32px 0 !important;
+    }
+    .timeline-element:not(:last-child) .timeline-badge-dark {
+        background: #FF6464 !important;;
+    }
+    .timeline.timeline-dark ol .timeline-element {
+        background: #FF6464 !important;
+    }
+
+    .timeline .switch-success .switch-toggle {
+        width: 30px;
+        height: 19px;
+        background: #FF6464;
+    }
+    .timeline .goABitUp {
+        padding-left: 4%;
+    }
+    .switch input[type="checkbox"]:checked ~ label .switch-arrow {
+        -webkit-transform: translate3d(48px, 0, 0);
+        transform: translate3d(12px, 0, 0);
+
+    }
+    .switch-success input[type="checkbox"]:checked ~ label .switch-toggle {
+        background: #960000;
+    }
+    
+    .switch-arrow {
+        width: 13px;
+        height: 13px;
+    }
+    .switch-container {
+        display: flex;
+        align-items: center;
+        font-size: 9px;
+    }
+
+}

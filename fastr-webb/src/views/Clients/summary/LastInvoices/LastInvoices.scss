@@ -1,0 +1,69 @@
+.last-invoices-container {
+    border-radius: 8px 8px 0px 0px;
+    width: 100%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) !important;
+
+    h6{
+        display: inline-block;
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .invoice-details {
+        display: flex;
+        flex-direction: column;
+        .invoice-id {
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .invoice-price {
+            color: #9C3C7A;
+            font-size: 14px;
+        }
+        .invoice-payment-incident {
+            color: #DA3832;
+            font-size: 10px;
+        }
+        .invoice-payment-delay{
+            font-size: 8px;
+        }
+    }
+    
+    .other-invoices {
+        background: #fff;
+        .invoice-details {
+            display: flex;
+            flex-direction: column;
+            .invoice-id {
+                font-weight: 600;
+                font-size: 11px;
+            }
+    
+            .invoice-price {
+                color: #000;
+                font-size: 14px;
+            }
+            .invoice-payment-incident {
+                color: #DA3832;
+                font-size: 10px;
+            }
+            .invoice-payment-delay{
+                font-size: 8px;
+            }
+        }
+    }
+}
+
+
+.background-grey {
+    background: #F1F1F1;
+}
+
+

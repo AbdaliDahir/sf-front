@@ -1,0 +1,65 @@
+.action-modal {
+    .card-body {
+        padding: 0;
+    }
+    .action-modal__title {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgba(0, 0, 0, 0.03);
+        border: 1px solid #dee2e6;
+    }
+    .action-modal__content {
+        padding: 0.75rem 1.25rem;
+
+        .mediaV2__wrapper {
+            position: relative;
+            padding: 20px 0 0;
+
+            .mediaV2__new_contact_button {
+                position: absolute;
+                right: 0;
+                top: -10px;
+            }
+
+            .media__new_contact_button {
+                margin-top: 10px;
+                margin-right: 0;
+            }
+        }
+    }
+
+    .action-modal__additional-data {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 1.1%;
+        margin: 0 0 30px 0;
+        >* {
+            min-width: 32.6%;
+            max-width: 32.6%;
+        }
+        .form-group {
+            margin-bottom: 0rem;
+        }
+        h6 {
+            font-weight: 400;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+    }
+
+    .respectSize {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    // .blockquote {
+    //     margin-top: 0 !important;
+    //     .form-control {
+    //         border-top-left-radius: 0;
+    //         border-top-right-radius: 0;
+    //         border-top: 0;
+    //     }
+    // }
+
+
+}

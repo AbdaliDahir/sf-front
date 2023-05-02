@@ -1,0 +1,21 @@
+.timeElapsedBadge {
+  width: 72px;
+  color: #fff;
+  background: transparent linear-gradient(180deg, #DA3832 0%, #9C3C7A 100%) 0% 0% no-repeat padding-box;
+  border-radius: 8px 0px 0px 8px;
+  opacity: 1;
+  text-align: center;
+  padding: 5px;
+
+  .timeElapsed {
+    font-weight: bold;
+    font-size: 12px;
+  }
+}
+
+.partial-height {
+  height: 81px;
+}
+.full-height {
+  height: 100%;
+}

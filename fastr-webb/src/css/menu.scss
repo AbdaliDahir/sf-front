@@ -1,0 +1,52 @@
+@import "variables";
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+
+.menu-item{
+  background-color: $marron;
+  width: 146px;
+  margin-left: 0.5rem;
+}
+.menu-item:hover {
+  background-color: $marron-fonce;
+  width: 153px;
+}
+.menu-item-selected:hover {
+  background-color: $marron-fonce;
+}
+
+.menu-item-selected {
+  background-color: $white;
+  max-width: 153px;
+}
+.text-marron{
+  color: $marron !important;
+}
+.text-marron:hover{
+  color: $white !important;
+}
+.menu-icon{
+  width: 20.29px;
+  height: 19.7px;
+}
+.icon-customer-white {
+  background-image: url("../img/customer-white.svg");
+}
+.icon-customer-gradient {
+
+  background-image: url("../img/customer-gradient.svg");
+}
+.icon-societe-white {
+  background-image: url("../img/societe-white.svg");
+}
+.icon-societe-gradient {
+  background-image: url("../img/societe-gradient.svg");
+}
+.icon-param-white {
+  background-image: url("../img/param-white.svg");
+}
+.icon-param-red {
+  background-image: url("../img/param-red.svg");
+}
+.icon-search-red {
+  background-image: url("../img/search-red.svg");
+}

@@ -1,0 +1,46 @@
+.last-arbeo-diag-popover__popover{
+    display: flex;
+    flex-direction: column;
+    .popover{
+        max-width: 590px;
+        margin-right: 12px;
+    }
+}
+
+.last-arbeo-diag-popover__card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    >* {
+        min-width: 50%;
+        max-width: 50%;
+    }
+}
+
+.last-arbeo-diag-popover__card-grid-list{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    ul{
+        margin: 0;
+        padding: 0;
+        list-style-position: inside;
+    }
+    li{
+        margin: 0;
+        line-height: 1rem;
+        &::marker {
+            margin-right: 1px;
+            font-size: smaller;
+        }
+    }
+}
+
+.last-arbeo-diag-popover__card-grid-cell-title {
+    font-weight: bold;
+    line-height: normal !important;
+}
+
+.last-arbeo-diag-popover__card-grid-act-label{
+    line-height: 1rem;
+    margin: 0;
+}

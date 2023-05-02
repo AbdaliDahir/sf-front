@@ -1,0 +1,33 @@
+.offer-container {
+    border-radius: 8px 8px 0px 0px;
+    width: 100%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) !important;
+    .title-label {
+        font-size: 12px;
+        margin-left: 5px;
+        font-weight: 600;
+    }
+
+    .offer-infos{
+        font-size: 11px;
+    }
+    .geste-commerciel {
+        height: 45px;
+        width: 100%;
+        .gestes-en-cours  {
+            font-size: 9px;
+            height: 100%;
+        }
+        
+    }
+    .commercial-container {
+        background: #F1F1F1;
+    }
+    
+   
+}
+
+.popover.show {
+    max-height: 400px !important;
+    overflow-y: scroll ;
+}

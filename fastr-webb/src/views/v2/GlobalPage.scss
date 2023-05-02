@@ -1,0 +1,56 @@
+@import "src/css/variables";
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+.globalpagecontent {
+  height: calc(100%);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+.globalpagecontent > .flex-content.active {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+}
+.main{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  &-dashboard{
+    display: inherit;
+    &-left{
+      min-width: $dashboard-left-width;
+    }
+    &-right{
+      min-width: $dashboard-right-width;
+      background-color: #F1F1F1 !important;
+      &-security{
+        min-height: 2rem;
+        background-color: #FFFFFF !important;
+        border-radius: 4px;
+      }
+      &-titulaire{
+        min-height: 10rem;
+        background-color: #FFFFFF !important;
+        border-radius: 4px;
+      }
+      &-service{
+        background-color: #FFFFFF !important;
+        border-radius: 4px;
+      }
+      &-alerte{
+        min-height: 10rem;
+        background-color: #FFFFFF !important;
+        border-radius: 4px;
+      }
+    }
+  }
+  &-container{
+    // min-width: 958px;
+    &-full{
+      width:calc(100% - #{$dashboard-left-width}) ;
+    }
+  }
+
+}

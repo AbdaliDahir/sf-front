@@ -1,0 +1,24 @@
+.modal-body {
+  padding-left: 3% !important;
+  padding-right: 3% !important;
+}
+
+.impaye {
+  height: 100%;
+  padding: 0;
+  margin-left: -15px;
+  position: relative;
+}
+
+.impaye:before {
+  content: "";
+  height: 100%;
+  width: 2px;
+  background: #ccc;
+  position: absolute;
+}
+
+.montant {
+  padding-right: 4% !important;
+  padding-left: 0 !important;
+}

@@ -1,0 +1,26 @@
+.retentionDataFormMotif,
+.retentionDataFormSousMotif,
+.retentionDataFormProposal,
+.retentionDataFormRefCommande,
+.retentionDataFormCauseInegibility {
+  position: relative;
+  &:before {
+    content: "";
+    position: relative;
+    height: 0;
+    width: 0;
+  }
+
+  &.disabled {
+    &:before {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.retentionTooltip .tooltip.show {
+  opacity: 1!important;
+  filter: alpha(opacity=100);
+}

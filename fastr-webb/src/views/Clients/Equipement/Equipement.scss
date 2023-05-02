@@ -1,0 +1,16 @@
+
+
+#tab-device-container {
+  .nav-link {
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .active-tab {
+    font-weight: bold;
+    color: #E12432;
+    border: none;
+    border-bottom: solid 2px #E12432 !important;
+  }
+
+}

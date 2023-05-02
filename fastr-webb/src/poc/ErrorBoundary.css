@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.wrapper-sm {
+  display: flex;
+  padding: 25px 0px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.wrapper-sm h2 {
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+}
+.wrapper h2 {
+  margin-top: 3.5rem;
+}
+
+.reload {
+  margin-left: 0.3rem;
+}
+
+.reload,
+.contact {
+  color: #ce3940 !important;
+  cursor: pointer;
+}

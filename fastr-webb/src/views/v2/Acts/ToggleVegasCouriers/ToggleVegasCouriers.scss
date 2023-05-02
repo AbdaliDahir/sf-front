@@ -1,0 +1,31 @@
+.external-event {
+    align-items: center;
+    display: flex;
+    height: 50px;
+}
+
+.even {
+    background-color: #f1f1f1;
+}
+
+.external-event-icon {
+    font-size: 16px;
+}
+
+.external-event-checkbox {
+    position: relative;
+    top: -6px;
+    left: 5px;
+}
+
+.arrow-icon {
+    position: relative;
+    top: -12px;
+    color: #da3c3c;
+    font-size: 12px;
+}
+
+.external-link {
+    color: blue;
+    cursor: pointer;
+}

@@ -1,0 +1,20 @@
+.comm-modal {
+    max-width: 90%;
+    max-height: 80vh;
+}
+
+.comm-modal .template {
+    width: 60%;
+    overflow-y: scroll;
+    max-height: 80vh;
+
+}
+
+
+.comm-modal .template .paramHighlighted {
+    background: gold;
+}
+
+.comm-modal .template .focus-highlight {
+    border-bottom: solid 1px black;
+}

@@ -1,0 +1,8 @@
+<svg id="stairs" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="Rectangle_84" data-name="Rectangle 84" width="24" height="24" fill="none"/>
+  <g id="Groupe_84" data-name="Groupe 84" transform="translate(3 3)">
+    <g id="Groupe_83" data-name="Groupe 83">
+      <path id="Tracé_36" data-name="Tracé 36" d="M19,3H5A2.006,2.006,0,0,0,3,5V19a2.006,2.006,0,0,0,2,2H19a2.006,2.006,0,0,0,2-2V5A2.006,2.006,0,0,0,19,3ZM18,8H15.58v3.33H13v3.33H10.42V18H6V16H8.42V12.67H11V9.33h2.58V6H18Z" transform="translate(-3 -3)" fill="#da3832"/>
+    </g>
+  </g>
+</svg>

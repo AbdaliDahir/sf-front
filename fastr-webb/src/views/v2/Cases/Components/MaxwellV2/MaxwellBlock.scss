@@ -1,0 +1,22 @@
+.incident-line {
+
+  & .col,
+  & .col-1,
+  & .col-2,
+  & .col-3,
+  & .col-4,
+  & .col-auto {
+    padding: 0 5px 0 5px;
+  }
+
+  &:last-child {
+    border: 1px solid transparent !important;
+  }
+
+  .badge {
+    text-transform: none;
+    font-weight: 400;
+    // height: 45px;
+    // width: fit-content;
+  }
+}

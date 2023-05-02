@@ -1,0 +1,14 @@
+.generic-card-toggle__picto{
+    display: flex;
+    margin-right: 5px;
+
+}
+
+.generic-card-toggle__extended-title{
+    display: flex;
+    &:before{
+        content: ":";
+        padding-right: 10px;
+        padding-left: 3px;
+    }
+}

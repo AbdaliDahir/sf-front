@@ -1,0 +1,44 @@
+.red-outline {
+  border-color: #ad241f;
+}
+
+.requiredValueMsg {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 9px;
+  color: #da3832;
+}
+
+.show-active-disabled .form-button-group.active.disabled {
+  background-color: #b82721;
+  border-color: #ad241f;
+  opacity: 0.95;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.hover-bg-light:hover {
+  background-color: #f8f9fa;
+}
+
+.hover-bg-secondary:hover {
+  background-color: #e3e3e6;
+}
+
+.hover-bg-none:hover {
+  background-color: transparent !important;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.ripple:hover {
+  background: #e3e3e6 radial-gradient(circle, transparent 1%, #f1f1f1 1%) center/15000%;
+}
+
+.ripple:active {
+  background-color: #ccc;
+  background-size: 100%;
+  transition: background 0s;
+}

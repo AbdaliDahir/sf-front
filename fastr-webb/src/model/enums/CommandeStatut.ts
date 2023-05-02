@@ -1,0 +1,6 @@
+export enum CommandeStatut {
+    STATUT_ANNULEE = "ANNULÉE",
+    STATUT_COMPLETE = "TERMINÉE",
+    STATUT_EN_COURS = "EN COURS",
+    STATUT_ERROR = "EN ERREUR"
+}

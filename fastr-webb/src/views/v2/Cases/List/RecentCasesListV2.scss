@@ -1,0 +1,54 @@
+.RecentCasesListV2 {
+  .badge {
+    width: fit-content;
+    height: 30px;
+    border-radius: 12px;
+    line-height: initial;
+    font-size: 14px;
+  }
+
+  .btn.histo {
+    text-transform: uppercase;
+  }
+
+  .CaseCard {
+    border-radius: initial;
+    background: #F1F1F1;
+
+    .caseBlockContainer {
+      padding: 16px 16px 16px 20px;
+    }
+
+    .caseRequestAnswer {
+      background: #fff;
+      padding-bottom: 0;
+    }
+
+    .detail-bloc {
+      cursor: pointer;
+      margin-left:-20px;
+      padding: 2px 0;
+      margin-top: 16px;
+
+      &:hover {
+        background: #F1F1F1
+      }
+    }
+
+    .arrow-up {
+      background-image: url("../../../../img/ihmV2/arrow-up.svg");
+    }
+
+    .arrow-down-red {
+      background-image: url("../../../../img/ihmV2/arrow-down-red.svg");
+    }
+
+    .opencard:hover {
+      cursor: pointer;
+    }
+  }
+
+  .card-header {
+    border-radius: initial;
+  }
+}

@@ -1,0 +1,19 @@
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+
+.billing-tables-header {
+  padding-left: 30px;
+}
+
+#billing-tab-container {
+  .active-tab {
+    font-weight: bold;
+    color: $primary;
+    border: none;
+    border-bottom: solid 2px $primary !important;
+  }
+}
+
+.bill-details {
+  border-top: solid 1px rgba(112, 112, 112, 0.15);;
+  border-bottom: none;
+}

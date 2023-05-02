@@ -1,0 +1,79 @@
+.chartSelectContainer {
+    width: 100%;
+    align-self: flex-start;
+}
+.chartSelectBlock {
+    padding: 0 15px;
+}
+.chartSelectInput {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 0 10px 0;
+}
+.chartSelectInput label {
+    margin: 0 10px 0 0;
+}
+.chartSelectInput .form-group {
+    margin: 0 !important;
+}
+.chartContainer {
+    height: 500px;
+}
+.barChartContainer {
+    width: 60%;
+}
+.chartDetailsContainer {
+    width: 40%;
+    padding: 0 1%;
+}
+.rubriqueSquare {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(215, 56, 53, 0.7);
+}
+.chart-data-fething-error {
+    color: #da3832;
+}
+.detail-amount {
+    white-space: nowrap;
+}
+
+@media (max-width: 1367px) {
+    .chartContainer {
+        height: 450px;
+    }
+    .barChartContainer {
+        width: 55%;
+    }
+    .chartDetailsContainer {
+        width: 45%;
+    }
+}
+
+@media (max-width: 1300px) {
+
+    .chartSelect {
+        display: block;
+    }
+    .chartSelect label {
+        width: 100%;
+    }
+
+     .chartSelectContainer,
+     .barChartContainer,
+     .chartDetailsContainer{
+        width: 100%;
+        padding-right: 0;
+    }
+    .chartDetailsContent {
+        padding: 0 45px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chartSelectBlock, .chartSelectInput {
+        width: 100%;
+        display: block;
+    }
+}

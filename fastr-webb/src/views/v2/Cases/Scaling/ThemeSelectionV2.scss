@@ -1,0 +1,56 @@
+.theme-selection-v2__card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  background: transparent linear-gradient(180deg,#da3832,#9c3c7a) 0 0 no-repeat padding-box;
+
+  & > * {
+    color: #fff;
+  }
+}
+
+.theme-selection-v2__card-header-breadcrumb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .breadcrumb {
+    padding: 0 0 0 1em;
+    margin: 0 !important;
+    background: transparent;
+  }
+}
+
+.theme-selection-v2__annuler-escalade_button {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.theme-selection-v2 {
+  padding-left: 5px;
+}
+
+.theme-additional-data {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.1%;
+  margin: 5px 0 5px 0;
+  padding: 0 10px;
+  >* {
+    min-width: 32.6%;
+    max-width: 32.6%;
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+  h6 {
+    font-weight: 400;
+    font-size: 0.875rem;
+    margin-bottom: 0;
+  }
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+}

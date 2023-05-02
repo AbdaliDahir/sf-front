@@ -1,0 +1,57 @@
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+
+.timeline-container {
+
+  .timeline {
+    border-left: solid 3px $primary;
+    line-height: 1.2em;
+    padding: 10px 10px 4px 10px;
+    list-style: none;
+    text-align: left;
+    margin-left: 10px;
+    overflow: visible;
+
+    h3 {
+      font-size: 12px;
+    }
+
+    .event {
+      border-bottom: solid 1px rgba(112, 112, 112, 0.15);
+      padding: 0.8rem;
+      margin-bottom: 0;
+      position: relative;
+
+      &:last-of-type {
+        margin-bottom: -21px;
+        padding-bottom: 0;
+        border: none;
+      }
+
+      &:first-of-type {
+        margin-top: -21px;
+      }
+
+      &.grey:after {
+        box-shadow: 0 0 0 3px #707070 !important;
+      }
+
+      &:after {
+        position: absolute;
+        display: block;
+        top: 0;
+      }
+
+      &:after {
+        box-shadow: 0 0 0 3px $primary;
+        left: -17px;
+        background: white;
+        border-radius: 50%;
+        height: 11px;
+        width: 11px;
+        content: "";
+        top: 11px;
+      }
+    }
+  }
+}
+

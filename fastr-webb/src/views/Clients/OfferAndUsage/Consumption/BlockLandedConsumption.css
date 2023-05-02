@@ -1,0 +1,73 @@
+.consumptionTable thead th {
+    vertical-align: top !important;
+}
+
+
+.consumptionTable tbody tr td {
+    vertical-align: middle;
+}
+
+
+.consumptionTable .synthetic td, .synthetic th {
+    font-size: 11px;
+    padding: 0px !important;
+}
+
+
+.consumptionTable th.theme {
+    width: 35%;
+}
+
+.consumptionTable .row {
+    margin-right: 0px;
+}
+
+.consumptionTable .form-control {
+    padding: 0.25rem;
+    height: 1.5rem !important;
+    display: inline;
+    font-size: 0.75rem;
+}
+
+.consumptionTable .react-datepicker-popper {
+    top: inherit !important;
+    left: inherit !important;
+    transform: inherit !important;
+    will-change: inherit !important;
+}
+
+/* Because IE doesn't understand flexbox */
+.consumptionTable .react-datepicker__input-container {
+    width: 60px;
+}
+
+.consumptionTable tbody {
+    cursor: pointer;
+}
+
+.typeUsage, .juridiction  {
+    width: 200px;
+}
+
+.amount .filter.number-filter {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.amount select.number-filter-comparator.form-control {
+    margin: 0 5px;
+}
+
+.consumptionTable {
+    overflow-y: auto !important;
+    height: 450px;
+}
+
+.block-ui-wrapper>div:first-child {
+    overflow-x: hidden;
+}
+
+
+
+
+

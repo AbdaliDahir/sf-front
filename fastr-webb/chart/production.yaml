@@ -1,0 +1,42 @@
+# Default values for fastr-backend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+environment: production
+tag: production
+
+fastr:
+  name: fastr-web
+
+  extranet:
+    replicaCount: 3
+    ingress:
+      enabled: true
+      annotations: {}
+      hosts:
+        - url: fastr.espacesfr.sfr.fr
+          services:
+            - extranet
+
+  internet:
+    replicaCount: 3
+    ingress:
+      enabled: true
+      annotations: {}
+      hosts:
+        - url: fastr.distrib.sfr.fr
+          services:
+            - internet
+
+  #Nommer le service selon le path qui sera root sur l'ingress (/fastr/{xxxx})
+  intranet:
+    replicaCount: 3
+    ingress:
+      enabled: true
+      annotations: {}
+      hosts:
+        - url: fastr.private.sfr.com
+          services:
+            - intranet
+        - url: fastr.web.ctn1.pic.services.prod
+          services:
+            - intranet

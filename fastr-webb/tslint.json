@@ -1,0 +1,23 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "node_modules/**",
+      "src/messages/**",
+      "scripts/**"
+    ]
+  },
+  "rules": {
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "jsx-boolean-value": false,
+    "interface-name": [true, "never-prefix"],
+    "no-console": [true, "log", "info"],
+    "object-shorthand": ["error", "never"],
+    "array-type": false,
+    "no-reference": false,
+    "no-any": true
+  }
+}

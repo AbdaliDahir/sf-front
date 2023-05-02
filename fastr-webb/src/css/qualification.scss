@@ -1,0 +1,39 @@
+.qualification-box {
+  transition: all 0.3s linear;
+  cursor: pointer;
+
+  .icon-gradient {
+    margin-left: 0.5em;
+    transform: scale(0.7);
+  }
+}
+
+.qualification-box__list {
+  max-width: 100%;
+  background: transparent;
+  height: fit-content;
+  margin-left: 10px;
+  font-size: 0.9em;
+}
+
+.qualification-box__selected {
+  color: #da3832;
+}
+
+.qualification-scaling-selection__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > section {
+    display: flex;
+    align-items: flex-end;
+
+    .breadcrumb {
+      margin: 0;
+      padding: 0 0 0 1em;
+      max-width: 769px;
+      background: transparent;
+    }
+  }
+}

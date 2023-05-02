@@ -1,0 +1,24 @@
+.grid-for-adg-inside-case__filter-section {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 3rem;
+    padding: 1rem;
+    label {
+        cursor: pointer;
+        margin-left: 3rem;
+        background-color: #f1f1f1;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        border: solid 1px grey;
+        &.selected{
+            background-color: #da3832;
+            border-color: #ad241f;
+            color:white;
+        }
+    }
+    input {
+         display: none;
+     }
+    :first-child{
+        margin-left:0;
+    }
+}

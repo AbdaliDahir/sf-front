@@ -1,0 +1,150 @@
+$red-active-tab: #E12432;
+
+#header {
+  height: $header-height;
+  top: 0;
+}
+
+#bloc-ligne {
+  height: $bloc-ligne-height;
+  top: $header-height;
+  background-color: #e7ebef;
+}
+
+#tab-container {
+
+  font-size: 12px;
+  @include media-breakpoint-up(lg) {
+    font-size: 1rem;
+  }
+
+  #thematic-tabs {
+    height: $tabs-height;
+    top: calc(#{$header-height} + #{$bloc-ligne-height})
+  }
+
+  #tabs-content {
+    margin-top: $fixed-header-height;
+    padding-top: 25px;
+    background-color: #fbfbfb;
+  }
+
+  .nav-tabs {
+    background-color: #f5f7f8;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+  }
+
+  .nav-link {
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    font-size: 0.65rem;
+    @include media-breakpoint-up(lg) {
+      font-size: 1rem;
+    }
+
+    .tab-alert {
+      vertical-align: super;
+      padding-left: 5px;
+    }
+  }
+  .active-tab {
+    font-weight: bold;
+    color: $red-active-tab;
+    border: none;
+    border-bottom: solid 2px $red-active-tab !important;
+  }
+}
+
+
+
+.card-title {
+  .icon-gradient {
+    font-size: 1rem;
+  }
+}
+
+#tab-sub-container {
+  .nav-link {
+    font-style: italic;
+    font-size: 0.64rem;
+  }
+}
+
+.card-block {
+  .card-title {
+    margin: 10px;
+
+    h6 {
+      font-size: .9rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+
+  .card-body {
+    margin: 0;
+    padding: 0;
+  }
+}
+.font-size-xxl {
+  font-size: 2.8rem;
+}
+
+.font-size-xl {
+  font-size: 1.4rem;
+}
+
+.font-size-l {
+  font-size: 1.2rem;
+}
+
+.font-size-m {
+  font-size: 1rem;
+}
+
+.font-size-sm {
+  font-size: 0.9rem;
+}
+
+.font-size-xs {
+  font-size: 0.8rem;
+}
+
+svg {
+  vertical-align: baseline;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.line-block {
+  z-index: 1023;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.service-nav {
+  .nav-link.active-tab {
+    cursor: default;
+  }
+}
+
+.navbar {
+  flex-wrap: nowrap !important;
+}
+
+.highLightRow:hover {
+  color: #212529;
+  background-color: rgba(0,0,0,.075);
+}
+
+.focusRow {
+  color: #212529;
+  background-color: rgba(0,0,0,.075);
+}

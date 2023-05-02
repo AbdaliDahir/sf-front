@@ -1,0 +1,14 @@
+.mt-10 {
+  margin-top: 6rem !important;
+}
+
+.login-box {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+}
+
+@for $i from 0 through 100 {
+  .height-#{$i} {
+    height: #{$i+0%} !important;
+  }
+}
+

@@ -1,0 +1,19 @@
+
+/* Spinner */
+.square-spin > div{
+  margin: 0 auto;
+  background-size: 50px 50px;
+  background: url("../img/sfr-red.svg") center;
+}
+
+.ui-blockui {
+  position: fixed !important;
+}
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  text-align: center;
+  display: block;
+}

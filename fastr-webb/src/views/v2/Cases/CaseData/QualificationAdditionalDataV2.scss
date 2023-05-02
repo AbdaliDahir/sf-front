@@ -1,0 +1,22 @@
+.qualification-additional-data {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.1%;
+  margin: 0 0 10px 0;
+  >* {
+    min-width: 32.6%;
+    max-width: 32.6%;
+  }
+  .form-group {
+    margin-bottom: 0rem;
+  }
+  h6 {
+    font-weight: 400;
+    font-size: 0.875rem;
+    margin-bottom: 0;
+  }
+  label {
+    font-size: 0.875rem;
+    margin-bottom: 0;
+  }
+}

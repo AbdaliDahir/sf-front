@@ -1,0 +1,874 @@
+variables:
+  KUBERNETES_VESRION: 1.13.5
+  HELM_VERSION: 2.11.0
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://localhost:2375
+  CI_REGISTRY: registry.pic.services.prod
+  HASH: $CI_COMMIT_SHORT_SHA
+  GIT_SSL_NO_VERIFY: 1
+
+stages:
+  - build-validation
+  - build-integration
+  - build-fut
+  - build-pilote
+  - validation
+  - integration
+  - fut
+  - pilote
+  - release_mvn
+  - production-0
+  - production-1
+  - rollback-production-1
+  - rollback-production-0
+# _______________________________ Intégration _________________________________
+# Builds
+build for integration:
+  stage: build-integration
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install --verbose
+    - npm rebuild node-sass
+    - npm run build:integ
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  when: manual
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: integration
+    IMAGE_NAME: fastr-web
+  only:
+    refs:
+      - develop
+      - release
+      - hotfix
+      - /^feature/
+      - /^pilote/
+      - tags
+
+build for integration distrib extranet:
+  stage: build-integration
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:integ-distrib-extra
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  when: manual
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: integration
+    IMAGE_NAME: fastr-web-distrib-extranet
+  only:
+    refs:
+      - develop
+      - release
+      - hotfix
+      - /^feature/
+      - /^pilote/
+      - tags
+
+build for integration distrib internet:
+  stage: build-integration
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:integ-distrib-inter
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  when: manual
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: integration
+    IMAGE_NAME: fastr-web-distrib-internet
+  only:
+    refs:
+      - develop
+      - release
+      - hotfix
+      - /^feature/
+      - /^pilote/
+      - tags
+
+# Deployment
+deploy to integration:
+  stage: integration
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart_tag
+  variables:
+    KUBE_NAMESPACE: fast-int
+    TAG: integration
+  when: manual
+  environment:
+    name: ipp/ctn1/integration
+    url: http://fastr-integ.pfv.private.sfr.com/
+  only:
+    refs:
+      - develop
+      - release
+      - hotfix
+      - /^feature/
+      - /^pilote/
+      - tags
+
+# _______________________________ Validation _________________________________
+# Builds
+build for validation:
+  stage: build-validation
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  variables:
+    TAG: preproduction
+    IMAGE_NAME: fastr-web
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install --verbose
+    - npm rebuild node-sass
+    - npm run build:preprod
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+
+  when: manual
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+build for validation distrib extranet:
+  stage: build-validation
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install --verbose
+    - npm rebuild node-sass
+    - npm run build:preprod-distrib-extra
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  when: manual
+  variables:
+    TAG: preproduction
+    IMAGE_NAME: fastr-web-distrib-extranet
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+build for validation distrib internet:
+  stage: build-validation
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install --verbose
+    - npm rebuild node-sass
+    - npm run build:preprod-distrib-inter
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  when: manual
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: preproduction
+    IMAGE_NAME: fastr-web-distrib-internet
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+# Deployment
+deploy to validation:
+  stage: validation
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart_tag
+  variables:
+    KUBE_NAMESPACE: fastr-pfv1
+    TAG: preproduction
+  when: manual
+  environment:
+    name: preproduction
+    url: http://fastr.pfv.private.sfr.com/
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+# _______________________________ Pilote  ________________________________________
+# Builds
+build for pilote:
+  stage: build-pilote
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install --verbose
+    - npm rebuild node-sass
+    - npm run build:pilote
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: pilote
+    IMAGE_NAME: fastr-web
+  when: manual
+  only:
+    refs:
+      - release_pilote
+
+build for pilote distrib extranet:
+  stage: build-pilote
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:pilote-distrib-extra
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  when: manual
+  variables:
+    TAG: pilote
+    IMAGE_NAME: fastr-web-distrib-extranet
+  only:
+    refs:
+      - release_pilote
+
+build for pilote distrib internet:
+  stage: build-pilote
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:pilote-distrib-inter
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: pilote
+    IMAGE_NAME: fastr-web-distrib-internet
+  when: manual
+  only:
+    refs:
+      - release_pilote
+
+# Deployment
+deploy to pilote-hr:
+  stage: pilote
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart_tag
+  variables:
+    KUBE_NAMESPACE: fast-add
+    TAG: pilote
+  when: manual
+  environment:
+    name: production-1
+  only:
+    refs:
+      - release_pilote
+
+deploy to pilote-trp:
+  stage: pilote
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart_tag
+  variables:
+    KUBE_NAMESPACE: fast-add
+    TAG: pilote
+  when: manual
+  environment:
+    name: production-0
+  only:
+    refs:
+      - release_pilote
+
+# _______________________________ Fut  ________________________________________
+# Builds
+build for fut:
+  stage: build-fut
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install --verbose
+    - npm rebuild node-sass
+    - npm run build:fut
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: fut
+    IMAGE_NAME: fastr-web
+  when: manual
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+build for fut distrib extranet:
+  stage: build-fut
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:fut-distrib-extra
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  when: manual
+  variables:
+    TAG: fut
+    IMAGE_NAME: fastr-web-distrib-extranet
+    CA_CERTIFICATE_HUB: "$CA_CERTIFICATE_HUB"
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+build for fut distrib internet:
+  stage: build-fut
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:fut-distrib-inter
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA-$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: fut
+    IMAGE_NAME: fastr-web-distrib-internet
+    CA_CERTIFICATE_HUB: "$CA_CERTIFICATE_HUB"
+  when: manual
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+# Deployment
+deploy to fut-hr:
+  stage: fut
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart_tag
+  variables:
+    KUBE_NAMESPACE: fast-add
+    TAG: fut
+    CA_CERTIFICATE_HUB: "$CA_CERTIFICATE_HUB"
+  when: manual
+  environment:
+    name: production-1
+    url: http://fastr-fut.private.sfr.com/
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+deploy to fut-trp:
+  stage: fut
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart_tag
+  variables:
+    KUBE_NAMESPACE: fast-add
+    TAG: fut
+    CA_CERTIFICATE_HUB: "$CA_CERTIFICATE_HUB"
+  when: manual
+  environment:
+    name: production-0
+    url: http://fastr-fut.private.sfr.com/
+  only:
+    refs:
+      - develop
+      - /^feature/
+      - /^pilote/
+      - release
+      - release_pilote
+      - hotfix
+      - tags
+
+# _______________________________ Production  _________________________________
+# Release / Build
+release:
+  stage: release_mvn
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:prod
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: production
+    IMAGE_NAME: fastr-web
+  only:
+    refs:
+      - tags
+
+release distrib extranet:
+  stage: release_mvn
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:prod-distrib-extra
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: production
+    IMAGE_NAME: fastr-web-distrib-extranet
+  only:
+    refs:
+      - tags
+
+release distrib internet:
+  stage: release_mvn
+  image: registry.pic.services.prod/valentine-tutos/ci/nodejs:13.6.0.2-old
+  services:
+    - name: registry.pic.services.prod/valentine-tutos/docker-dind:0.0.1
+  script:
+    - npm config set noproxy "nexus.private.sfr.com"
+    - npm config set no_proxy "nexus.private.sfr.com"
+    - export no_proxy=nexus.private.sfr.com
+    - export noproxy=nexus.private.sfr.com
+    - npm install
+    - npm rebuild node-sass
+    - rm -Rf /deploy/build
+    - npm run build:prod-distrib-inter
+    - npm run postbuild
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_LOGIN -p $CI_REGISTRY_PASSWORD
+    - docker build deploy/ -t $CI_REGISTRY/fast/$IMAGE_NAME:$TAG -t $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA -t $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$TAG
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - docker push $CI_REGISTRY/fast/$IMAGE_NAME:$PACKAGE_VERSION
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - deploy/build
+    expire_in: 1 week
+  variables:
+    TAG: production
+    IMAGE_NAME: fastr-web-distrib-internet
+  only:
+    refs:
+      - tags
+
+# Deployment
+deploy to prod-ctn0:
+  stage: production-0
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart
+  environment:
+    name: production-0
+    url: http://fastr-back.private.sfr.com/
+  when: manual
+  variables:
+    TAG: production
+    KUBE_NAMESPACE: fastr-prod
+  only:
+    refs:
+      - tags
+
+deploy to prod-ctn1:
+  stage: production-1
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - deploy_chart
+  environment:
+    name: production-1
+    url: http://fastr-back.private.sfr.com/
+  when: manual
+  variables:
+    TAG: production
+    KUBE_NAMESPACE: fastr-prod
+  only:
+    refs:
+      - tags
+
+# RollBack
+rollback prod-ctn1:
+  stage: rollback-production-1
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - rollback
+  environment:
+    name: production-1
+    url: http://fastr-back.private.sfr.com/
+  when: manual
+  variables:
+    TAG: production
+    KUBE_NAMESPACE: fastr-prod
+  only:
+    refs:
+      - tags
+
+rollback prod-ctn0:
+  stage: rollback-production-0
+  image: registry.pic.services.prod/valentine/ci/helm-kubectl:2.11.0-1.13.5
+  script:
+    - initialize_tiller
+    - rollback
+  environment:
+    name: production-0
+    url: http://fastr-back.private.sfr.com/
+  when: manual
+  variables:
+    TAG: production
+    KUBE_NAMESPACE: fastr-prod
+  only:
+    refs:
+      - tags
+  # TODO: Marche pas (ne reset pas le tag)
+
+.function: &function |
+
+  export TILLER_NAMESPACE=$KUBE_NAMESPACE
+
+  function set_package_versions() {
+    export PACKAGE_VERSION=$(cat package.json \
+    | grep version \
+      | head -1 \
+      | awk -F: '{ print $2 }' \
+      | sed 's/[",]//g' \
+      | tr -d '[[:space:]]')
+
+    export RELEASE_VERSION=$(echo $PACKAGE_VERSION | sed  -e "s/-SNAPSHOT$//")
+    export NEXT_VERSION=$(echo $RELEASE_VERSION | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}')
+
+    echo "Current version is $PACKAGE_VERSION"
+    echo "Release version would be $RELEASE_VERSION"
+    echo "Next dev version would be $NEXT_VERSION"
+  }
+
+  function deploy_chart_tag() {
+        helm init --client-only --skip-refresh
+        helm list
+        helm upgrade --force --install --wait --namespace="$KUBE_NAMESPACE" \
+          --set tag="$CI_COMMIT_SHORT_SHA-$TAG" "$CI_PROJECT_NAME-$TAG"\
+          -f chart/shared-values.yaml -f chart/$TAG.yaml chart/
+        helm list
+  }
+
+  function deploy_chart() {
+        helm init --client-only --skip-refresh
+        helm list
+        helm upgrade --force --install --wait --namespace="$KUBE_NAMESPACE" \
+          --set tag=$CI_COMMIT_SHORT_SHA "$CI_PROJECT_NAME-$TAG" \
+          -f chart/shared-values.yaml -f chart/$TAG.yaml chart/
+        helm list
+  }
+
+  function rollback() {
+        helm init --client-only --skip-refresh
+        helm list
+        helm rollback --force --install \
+          --wait \
+          --namespace="$KUBE_NAMESPACE" \
+           "$CI_PROJECT_NAME"
+
+        helm list
+  }
+
+  function initialize_tiller() {
+    echo "Checking Tiller..."
+
+    export HELM_HOST="localhost:44134"
+    tiller -listen ${HELM_HOST} -alsologtostderr > /dev/null 2>&1 &
+    echo "Tiller is listening on ${HELM_HOST}"
+
+    if ! helm version --debug; then
+      echo "Failed to init Tiller."
+      return 1
+    fi
+    echo ""
+  }
+
+before_script:
+  - *function
+  - set_package_versions
+
+cache:
+  paths:
+    - node_modules/
+

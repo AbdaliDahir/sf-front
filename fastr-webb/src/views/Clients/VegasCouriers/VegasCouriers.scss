@@ -1,0 +1,43 @@
+.e-e-header {
+    cursor: pointer;
+}
+
+.e-e-header:hover {
+    opacity: 0.8;
+}
+
+.arrow-icon {
+    position: absolute;
+    top: 3px;
+    color: #da3c3c;
+    font-size: 10px;
+}
+
+.cases {
+    height: 51px;
+    overflow: hidden;
+}
+
+.overflow {
+    overflow: unset;
+    overflow-x: hidden;
+}
+
+.case-tooltip .tooltip .tooltip-inner {
+    width: 240px;
+    max-width: 240px;
+    text-align: left;
+}
+
+.other-services {
+    float: right;
+    font-style: oblique;
+    cursor: pointer;
+}
+
+.close-tooltip {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

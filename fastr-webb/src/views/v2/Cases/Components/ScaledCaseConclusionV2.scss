@@ -1,0 +1,23 @@
+.scaled_case_conclusion__form_element {
+    display: flex;
+    flex-direction: column;
+
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+
+    margin-bottom: 1rem;
+
+    .form-group {
+     margin: 0;
+    }
+}
+
+.scaled_case_conclusion__first_line,
+.scaled_case_conclusion__second_line,
+.scaled_case_conclusion__third_line{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

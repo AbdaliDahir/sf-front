@@ -1,0 +1,44 @@
+.notes-description-container {
+    .description  {
+        white-space: pre-wrap;
+        &:not(:first-of-type) {
+            border-top: 1px solid #dee2e6;
+            padding-top: 0.5rem;
+        }
+        &:not(:last-of-type) {
+            padding-bottom: 0.5rem;
+        }
+    }
+
+}
+
+.to-the-top {
+    position:fixed;
+    z-index: 1;
+}
+
+.space-for-top {
+    padding-top: 75px;
+}
+
+.lg{
+    width: 70% !important;
+    max-width: 70% !important;
+}
+
+.vlg{
+    width: 90% !important;
+    max-width: 90% !important;
+}
+
+.scroll-wrapper {
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
+}
+
+.history_modal-body{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}

@@ -1,0 +1,73 @@
+.tray .synthetic td, .synthetic th {
+  font-size: 11px;
+  padding: 0px !important;
+}
+
+
+.tray th.theme {
+  width: 25%;
+}
+
+.tray .row {
+  margin-right: 0px;
+}
+
+.tray .form-control {
+  padding: 0.25rem;
+  height: 1.5rem !important;
+  display: inline;
+  font-size: 0.75rem;
+}
+
+.tray .react-datepicker-popper {
+  top: inherit !important;
+  left: inherit !important;
+  transform: inherit !important;
+  will-change: inherit !important;
+}
+
+/* Because IE doesn't understand flexbox */
+.tray .react-datepicker__input-container {
+  width: 60px;
+}
+
+.tray tbody {
+  cursor: pointer;
+}
+
+.tray_extended {
+  .react-bootstrap-table {
+    overflow-y: auto;
+    .table {
+      width: 125%;
+    }
+  }
+}
+
+
+.tray_extended {
+  .react-bootstrap-table {
+    overflow-y: auto;
+    .table.synthetic {
+      width: 110%;
+    }
+  }
+}
+
+
+.synthetic-tray__actid-cell {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.synthetic-tray__popover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  label {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,65 @@
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+@import "src/css/variables";
+.leftDashboard{
+  background: $red-1;
+  height: 100%;
+  position: absolute;
+  &-icon{
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+  &-logo{
+    width: $dashboard-left-width;
+  }
+  &-item:hover{
+    background-color:$marron-fonce
+  }
+  &-item-selected{
+    background-color:$white !important;
+    width: $dashboard-left-width;
+  }
+  &-item-full:hover, &-item-selected:hover{
+    width: $dashboard-left-width;
+    background-color:$marron-fonce !important;
+    border-radius: 0 !important;
+  }
+
+  &-input{
+    border-radius : 0 !important;
+    height: 20px !important;
+    &-group{
+      width: 150px !important;
+    }
+  }
+  &-btn{
+    width: 24px !important;
+    border-radius : 0 !important;
+    background-color:$white !important;
+    height: 20px !important;
+
+  }
+  &-btn:hover{
+    background-color:$marron-fonce !important;
+  }
+  &-btn > i {
+    margin-left: -3px
+  }
+
+  &-open{
+    transform: rotate(-90deg);
+    margin-left: 8.5rem;
+    display: none !important; // TODO REMOVE
+  }
+  &-close{
+    transform: rotate(90deg);
+    display: none !important; // TODO REMOVE
+  }
+  &-item-width{
+    width: fit-content !important;
+  }
+}
+
+.selected-border{
+  border-radius: 4px 0px 0px 4px;
+}

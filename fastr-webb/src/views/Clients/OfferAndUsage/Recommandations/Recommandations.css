@@ -1,0 +1,150 @@
+/*Synthetic view*/
+.recommandations__line {
+    display: flex;
+    justify-content: space-between;
+    border: 5px solid transparent;
+    cursor: pointer;
+}
+
+.recommandations__line .recommandations__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.recommandations__line .recommandations__title .recommandations__libelle-container {
+    width: 100%;
+}
+
+.recommandations__line .recommandations__title .recommandations__libelle {
+    max-width: 75%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.recommandations__line {
+    -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+    page-break-inside: avoid; /* Firefox */
+    break-inside: avoid; /* IE 10+ */
+    break-before: avoid;
+}
+
+/*Detailed view*/
+.recommandations__table {
+    width: 48% !important;
+    margin-left: 1.3%;
+}
+
+.recommandations__table tbody tr{
+    cursor: pointer;
+}
+
+.recommandations__table th,
+.recommandations__table td {
+    height: 40px;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+}
+
+.recommandations__table .recommandations__column-img {
+    width: 8%;
+}
+
+.recommandations__column {
+    width: 47%;
+    padding-left: 10px !important;
+}
+
+.recommandation-popover-table .popover.show {
+    width: 48% !important;
+    max-width: 48% !important;
+    margin-left: 1.3%;
+}
+
+.recommandation-popover-table .popover.show .arrow{
+    display: none;
+}
+
+/*both views*/
+.recommandations__line.active,
+.recommandations__table tbody tr.active {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.recommandation-popover-line .popover.show,
+.recommandation-popover-table .popover.show {
+    border: none !important;
+    border-radius: initial !important;
+}
+
+.recommandations__img-bloc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(52, 58, 64, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
+.recommandations__img-bloc.red {
+    background-color: #DA3832 !important;
+}
+
+.recommandations__img-bloc.smaller-img-bloc {
+    min-width: 38px;
+    width: 38px;
+    height: 29px;
+}
+
+.recommandations__img {
+    background-image: url(https://intra-ezy.sfr.com/home/frontoffice/dfo/dist/styles/images/cesar.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 80%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.81);
+}
+
+/*lien de debranchement EZY*/
+.btn.btn-secondary.customBtn {
+    color: #000 !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-color: transparent !important;
+    text-transform: initial !important;
+    text-decoration: underline;
+    margin: 10px 0 10px 5px;
+}
+
+.btn.btn-secondary.customBtn:focus {
+    box-shadow: none !important;
+}
+
+@media only screen and (max-width: 1024px){
+    .recommandations__table {
+        margin-left: 1.1%;
+    }
+
+    .recommandation-popover-table .popover.show {
+        margin-left: 1.1%;
+    }
+
+    .recommandations__table .recommandations__column-img {
+        width: 10%;
+    }
+}
+.rounded-5 {
+    border-radius: 5px;
+}

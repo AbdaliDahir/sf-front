@@ -1,0 +1,136 @@
+.timeline-panel-synthetic {
+    left: calc(100% - 125px) !important;
+}
+
+
+.timeline.timeline-dark ol .timeline-element:first-child {
+    width: 15px !important;
+}
+
+.timeline.timeline-dark ol .timeline-element:not(:first-child) {
+    margin-left: 0px!important;
+}
+
+.timeline.timeline-dark ol .timeline-element {
+    background: #787878!important;
+}
+
+.timeline.timeline-dark ol .timeline-element:last-child {
+    width: 15px !important;
+}
+
+.background-magnifying-glass {
+    background-color: #1d2124;
+    padding:5px;
+    padding-left:6px;
+    border-radius: 20px;
+}
+
+.z-index-1 {
+    z-index:1;
+}
+
+
+.timeline-panel-synthetic-param {
+    line-height: 1 !important;;
+}
+
+.go-up-timeline {
+    position: absolute;
+    top:5px;
+    width:100%;
+}
+
+.olSyntheticView{
+    padding-top: 65px !important;
+    padding-bottom: 45px !important;
+    margin-bottom:0px;
+    overflow-y:hidden !important;
+}
+
+.labelsSynthetic {
+    font-size: 10px !important;
+}
+
+.badge-success-size-synthetic {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.icon-gift-synthetic, .icon-email-synthetic, .icon-phone-synthetic {
+    font-size: 8px !important;
+    display: inline-block;
+    margin: 3px;
+    text-indent: 1.2em !important;
+    content: "\00a0";
+}
+
+.icon-gift-detailled, .icon-email-detailled, .icon-phone-detailled {
+    font-size: 10px !important;
+    display: inline-block;
+    margin: 3px;
+    text-indent: 1.3em !important;
+    content: "\00a0";
+}
+
+.timeline-element-synthetic {
+    width: 80px !important;
+    height: 3px !important;
+}
+
+.sizeForModal {
+    max-height: 1170px;
+    height: 1170px;
+    max-width:902px !important;
+}
+
+.switch-toggle {
+    width:35px;
+}
+
+.switch input[type=checkbox]:checked~label .switch-arrow-xs  {
+    transform: translate3d(13px,0,0);
+}
+
+.small, small {
+    font-size: 55%;
+    font-weight: 500;
+
+}
+
+.label-xs {
+    margin-bottom: 0px;
+}
+
+.hideOverflow {
+    overflow: hidden;
+}
+
+.goUpForBiosSoco{
+    position:absolute;
+    top: 375px;
+    width: 100%;
+}
+
+.goUpForSoco{
+    position:absolute;
+    top: 375px;
+    width: 100%;
+}
+
+
+.timeline.timeline-dark ol .timeline-element:nth-child(even) .timeline-panel {
+    margin-top: 20px;
+    top:0;
+}
+
+.timeline.timeline-dark ol .timeline-element:nth-child(odd) .timeline-panel {
+    margin-bottom: 0;
+    margin-top: 20px;
+    top:0;
+    transform: unset;
+}
+
+.timeline-panel-synt-popup{
+    margin-top: -90% !important;
+}

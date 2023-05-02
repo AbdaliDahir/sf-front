@@ -1,0 +1,23 @@
+.notes-description-container {
+    .description  {
+        white-space: pre-wrap;
+        &:not(:first-of-type) {
+            border-top: 1px solid #dee2e6;
+            padding-top: 0.5rem;
+        }
+        &:not(:last-of-type) {
+            padding-bottom: 0.5rem;
+        }
+    }
+
+}
+
+
+.to-the-top {
+    position:fixed;
+    z-index: 1;
+}
+
+.space-for-top {
+    padding-top: 75px;
+}

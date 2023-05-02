@@ -1,0 +1,8 @@
+.small-custom-label { 
+  padding-left: 1.25rem;
+  &.custom-radio .custom-control-label::before,
+  &.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    width: 1rem;
+    height: 1rem; 
+  }
+}

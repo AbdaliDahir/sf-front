@@ -1,0 +1,25 @@
+.card-hover:hover {
+  box-shadow: 10px 10px 10px rgba(52, 48, 48, 0.247) !important;
+  cursor: pointer;
+}
+
+.w-1-3 {
+  width: 40%;
+}
+
+.filter-bloc {
+  width: 20%;
+}
+
+.w-1-5 {
+  width: 28%;
+}
+
+.date-input {
+  padding: 8px 14px;
+  border-radius: 5px;
+  border-color: #8888;
+  margin-right: 13px;
+  color: #888;
+  font-weight: bold;
+}

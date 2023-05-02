@@ -1,0 +1,27 @@
+.call-transfer {
+  display: flex;
+  flex: 3;
+  padding-left: 1rem;
+}
+
+.call-transfer__form-element {
+  display: flex;
+  max-width: 40%;
+  width: 100%;
+  flex-direction: column;
+
+  .form-group {
+    margin: 0;
+  }
+}
+
+.call-transfer__form-element:nth-child(2) {
+  max-width: 20%;
+  margin-left: 0.5rem;
+}
+
+.call-transfer__form-element:nth-child(3){
+  .form-group{
+    margin-bottom: 1rem;
+  }
+}

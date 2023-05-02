@@ -1,0 +1,63 @@
+.tableEqpt .thead-dark th {
+  font-weight: 400;
+  height: 100%;
+  vertical-align: top;
+}
+
+.tableEqpt .thead-dark th[data-row-selection] {
+  width: 40px !important;
+  line-height: 100%;
+  vertical-align: middle;
+}
+
+.tableEqpt .thead-dark th input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+}
+
+.tableEqpt tbody input[type='checkbox']{
+  width: 15px;
+  height: 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: 1px solid gray;
+  box-shadow: none;
+  line-height: 1em;
+}
+
+.tableEqpt tbody input[type='checkbox']:checked:after {
+  content: '\25A0';
+  color: #da3832;
+  text-align: center;
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 16px;
+}
+
+.tableEqpt tbody input:disabled {
+  width: 100%;
+  position: relative;
+  left: -9999px;
+  top: -9999px;
+}
+
+.tableEqpt tbody input:disabled::before {
+  color: #da3832;
+  content: "Non réclam.";
+  position: absolute;
+  left: 9999px;
+  top: 9991px;
+}
+
+
+
+.tableEqpt table tbody td {
+  height: 100%;
+  vertical-align: middle;
+}
+
+

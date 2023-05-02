@@ -1,0 +1,12 @@
+.caseInfos,.caseSections {
+    max-height: 24px;
+}
+.case-synthese__picto{
+    cursor: pointer;
+    background: transparent linear-gradient(180deg, #DA3832 0%, #9C3C7A 100%) 0 0 no-repeat padding-box;
+}
+
+.case-synthese__picto-dark {
+    cursor: pointer;
+    background-color: black !important;
+}

@@ -1,0 +1,47 @@
+{{-  $app := printf "extranet" -}}
+{{-  $values := .Values.fastr.extranet -}}
+{{-  $serviceName := printf "fastr-web-extranet" -}}
+  {{- $fullName := include "fastr.extranet.fullname" . -}}
+{{-  $labelsFnc := printf "%s.%s.%s" "fastr" $app "labels" -}}
+{{-  $matchLabelsFnc := printf "%s.%s.%s" "fastr" $app "matchLabels" -}}
+{{- $root := . -}}
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: {{ $fullName }}
+    labels:
+        {{ include "fastr.labels" . | indent 4 }}
+        {{- with $values.ingress.annotations }}
+    annotations:
+        {{- toYaml . | nindent 4 }}
+        {{- end }}
+spec:
+        {{- if $values.ingress.tls }}
+    tls:
+            {{- range $values.ingress.tls }}
+        - hosts:
+                  {{- range .hosts }}
+              - {{ . | quote }}
+                {{- end }}
+          secretName: {{ .secretName }}
+        {{- end }}
+        {{- end }}
+    rules:
+            {{- range $values.ingress.hosts }}
+        - host: {{ .url | quote }}
+          http:
+              paths:
+                      {{- range .services }}
+                      {{-  $serviceName := printf "%s.%s.%s" "fastr" . "fullname" -}}
+                      {{-  $servicePort := printf "%s.%s.%s" "fastr" . "port" -}}
+                      {{  $servicePath := printf "%s.%s.%s" "fastr" . "path" }}
+                  - backend:
+                      service:
+                        name: {{ include $serviceName $root }}
+                        port:
+                          name: http
+                    path: /
+                    pathType: ImplementationSpecific
+        {{- end }}
+        {{- end }}

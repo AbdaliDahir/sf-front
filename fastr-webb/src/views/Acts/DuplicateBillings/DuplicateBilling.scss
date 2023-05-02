@@ -1,0 +1,89 @@
+.duplicate-billing-th {
+  padding: 1em;
+  width: 5%;
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+
+.duplicate-billing-td {
+  padding: 1em;
+  width: 5%;
+  border-top-color: grey;
+  border-top-width: 1px;
+  border-top-style: solid;
+  text-align: center;
+}
+
+.duplicate-billing-td-amount{
+  padding: 1em 6em 1em 1em;
+  width: 5%;
+  border-top-color: grey;
+  border-top-width: 1px;
+  border-top-style: solid;
+  text-align: right;
+}
+
+.duplicate-billing-tr-odd {
+  padding: 1em;
+  width: 5%;
+  border-top-color: grey;
+  border-top-width: 1px;
+  border-top-style: solid;
+  color: black;
+  background-color: #f1f1f1;
+}
+
+.duplicate-billing-tr:hover, .duplicate-billing-tr-odd:hover {
+  color: black;
+  background-color: #dee2e6;
+  border-color: #dee2e6;
+}
+
+.duplicate-billing-checkbox {
+  width: 2%;
+  border-top-color: grey;
+  border-top-width: 1px;
+  border-top-style: solid;
+  text-align: center;
+}
+
+.duplicate-billing-checkbox-th {
+  width: 2%;
+  border-top-color: grey;
+  border-top-width: 1px;
+  border-top-style: solid;
+  text-align: center;
+  background-color: black;
+}
+
+.duplicate-billing-row {
+  margin-right: 0px!important;
+  margin-left: 0px!important;
+}
+
+.duplicate-billing-first-row {
+  padding-bottom: 1.5em;
+  margin-right: 0px!important;
+  margin-left: 0px!important;
+}
+
+.duplicate-billing-last-row {
+  margin-right: 0px!important;
+  margin-left: 0px!important;
+  padding-top: 1.5em;
+}
+
+.duplicate-billing-Tooltip .tooltip.show {
+  opacity: 1!important;
+  filter: alpha(opacity=100);
+}
+
+.duplicate-billing-row-no-bills {
+  margin-right: 0px!important;
+  margin-left: 0px!important;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  text-align: center;
+  font-weight: bold;
+}

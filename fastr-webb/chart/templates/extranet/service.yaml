@@ -1,0 +1,44 @@
+{{/******************************************************************************
+   *  FAST ACTS                                                                 *
+   ******************************************************************************
+   * The template set the service resource on Kubernetes                        *
+   * for the service.                                                           *
+   *                                                                            *
+   * Change following two variables to set the app name                         *
+   *                                                                            *
+   ******************************************************************************/}} 
+
+{{-  $app := printf "extranet" -}}
+{{-  $values := .Values.fastr.extranet -}}
+
+{{/******************************************************************************
+   * You must change the app variable with the name of the service. For         *
+   * example, "cases", "billing", "clients", ....                               *
+   *                                                                            *
+   * You must change the values variable with the name of the service. For      *
+   * example: .Values.fastr.cases, .Values.fastr.billing,                       *
+   * .Values.fastr.clients, ....                                                *
+   ******************************************************************************/}} 
+
+
+{{-  $serviceName := printf "%s.%s.%s" "fastr" $app "fullname" -}}
+{{-  $labelsFnc := printf "%s.%s.%s" "fastr" $app "labels" -}}
+{{-  $matchLabelsFnc := printf "%s.%s.%s" "fastr" $app "matchLabels" -}}
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include $serviceName . }}
+  labels:
+    exporter: {{ $values.service.exporter }}
+{{ include $labelsFnc . | indent 4 }}
+spec:
+  type: {{ $values.service.type }}
+  ports:
+    - port: {{ $values.service.port }}
+      targetPort: {{ $values.service.port }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include $matchLabelsFnc . | nindent 4 }}

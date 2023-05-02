@@ -1,0 +1,30 @@
+.action-modal__content {
+  .card, .card-header, .alert {
+    border-radius: 0;
+    border: 0;
+    box-shadow: none !important;
+  }
+
+  .breadcrumb {
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .action-theme-selection-v2__card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 0;
+  }
+
+  .theme-additional-data {
+    margin-bottom: 25px;
+
+    .col-form-label {
+      font-weight: bold;
+    }
+  }
+}

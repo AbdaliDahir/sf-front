@@ -1,0 +1,85 @@
+# Default values for fastr-backend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+siroco: APP3488
+pullPolicy: Always
+restartPolicy: Always
+
+fastr:
+  name: fastr-web
+  #Nommer le service selon le path qui sera root sur l'ingress (/fastr/{xxxx})
+  extranet:
+    name: extranet
+    path: /
+    image:
+      repository: registry.pic.services.prod
+      subRepository: fast
+      name: fastr-web-distrib-extranet
+
+    liveness:
+      path: /
+      initialDelaySeconds: 200
+      timeoutSeconds: 30
+      failureThreshold: 10
+
+    readiness:
+      path: /
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+    service:
+      type: ClusterIP
+      port: 80
+  internet:
+    name: internet
+    path: /
+
+    image:
+      repository: registry.pic.services.prod
+      subRepository: fast
+      name: fastr-web-distrib-internet
+
+    liveness:
+      path: /
+      initialDelaySeconds: 200
+      timeoutSeconds: 30
+      failureThreshold: 10
+
+    readiness:
+      path: /
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+    service:
+      type: ClusterIP
+      port: 80
+  intranet:
+    name: intranet
+
+    path: /
+    image:
+      repository: registry.pic.services.prod
+      subRepository: fast
+      name: fastr-web
+
+    liveness:
+      path: /
+      initialDelaySeconds: 200
+      timeoutSeconds: 30
+      failureThreshold: 10
+
+    readiness:
+      path: /
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+    service:
+      type: ClusterIP
+      port: 80
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+

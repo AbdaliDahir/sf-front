@@ -1,0 +1,24 @@
+@import "src/css/variables";
+.client-tab {
+    height: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.client-page.service-nav {
+    background: transparent linear-gradient(168deg, $red-1, $red-1) 0 0 no-repeat padding-box;
+    padding: 5px 2px;
+    .nav-link {
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        height: 20px !important;
+    }
+    
+    .nav-link.active {
+        background: transparent !important;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.576) !important;
+        padding: 0;
+        margin: 0 3px;
+    }
+}

@@ -1,0 +1,21 @@
+.orderPage {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .stepbar-primary > .stepbar-item, .stepbar-redbysfr> .stepbar-item {
+    color: #212529;
+    &::before {
+      width: 26px;
+      height: 26px;
+      line-height: 24px;
+    }
+
+    &::after {
+      height: 11px;
+    }
+  }
+  .icon-down, .icon-up {
+    cursor: pointer;
+  }
+}

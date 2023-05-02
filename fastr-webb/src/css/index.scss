@@ -1,0 +1,97 @@
+@import "~sfr-bootstrap/dist/css/sfr-fonts.min.css";
+@import "~sfr-bootstrap/dist/css/sfr-icons.min.css";
+@import "~sfr-bootstrap/scss/sfr-bootstrap";
+@import "~loaders.css/loaders.min.css";
+@import "~react-block-ui/style.css";
+
+@import "variables";
+@import "layout";
+@import "loader";
+@import "bootstrap-dates";
+@import "tables";
+@import "qualification";
+@import "transition";
+@import "menu";
+html,
+body,
+#root,
+#fastr-container {
+    height: 100%;
+    width: 100%;
+    background-color: #fbfbfb;
+    font-size: 0.85rem;
+}
+
+.react-phone-number-input__icon img {
+    margin-bottom: 10px;
+}
+
+.flex-align-middle {
+    align-items: center;
+    display: flex;
+    display: -ms-flexbox;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed;
+}
+
+.text-smaller {
+    font-size: 0.8rem;
+}
+
+.no-margin-formgroup .form-group {
+    margin: 0;
+}
+
+.block-ui-wrapper,
+.block-ui-wrapper > div:first-child {
+    scrollbar-gutter: stable;
+    height: 100%;
+}
+
+.rbt-menu {
+    padding-left: 0;
+}
+
+.tab-content {
+    height: 100%;
+}
+
+#fastr-container {
+    .card {
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+    }
+    .card-header {
+        font-weight: bold;
+        background-color: $light;
+        padding: 0.3rem 1rem;
+        margin-bottom: 0;
+        .icon-gradient {
+            font-size: 1.1rem;
+        }
+        .icon-white {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.list-recent-cases-back {
+    margin: 5px 0;
+}
+
+.stepform .breadcrumb-item + .breadcrumb-item::before {
+    content: "> ";
+}
+
+.justify-content-evenly {
+    justify-content: space-evenly;
+}
+
+.text-prewrap {
+    white-space: pre-wrap;
+}

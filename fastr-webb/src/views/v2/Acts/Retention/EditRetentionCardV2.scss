@@ -1,0 +1,26 @@
+.edit_retention_card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent linear-gradient(180deg,#da3832,#9c3c7a) 0 0 no-repeat padding-box;
+    color: #FFF;
+
+    &.readonly {
+        background: transparent linear-gradient(#888 0%, #000 100%) 0 0 no-repeat padding-box;
+    }
+}
+
+.edit_retention_card__body {
+    & .form-group {
+        margin-bottom: 0;
+
+        & .switch {
+            white-space: nowrap;
+        }
+    }
+
+    & .row {
+        align-items: baseline;
+        margin-bottom: 0.5rem;
+    }
+}

@@ -1,0 +1,9 @@
+.incident-data-input__right-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &>*{
+        flex: 1;
+    }
+}

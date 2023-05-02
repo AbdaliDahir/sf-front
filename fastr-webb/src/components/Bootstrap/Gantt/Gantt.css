@@ -1,0 +1,60 @@
+.progress {
+    transform: rotate(180deg);
+}
+
+.box {
+    transform: rotate(90deg);
+}
+
+.progress-info-conso {
+    transform: rotate(360deg);
+}
+
+
+.special-progress-bar
+{
+    background-color: white!important;
+    border: white!important;
+    box-shadow: inset 0 0rem 0rem rgba(0, 0, 0, 0)!important;
+}
+
+.labelsBloc {
+    padding-right: 0 !important;
+}
+
+.progressBarBloc {
+    padding-left: 0 !important;
+}
+
+.progressContainer:nth-child(even),
+.labelsContainer:nth-child(even) {
+    background-color: #F8F8F8;
+}
+
+.labelsContainer {
+    margin: 0;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.labelsContainer .subLabels{
+    font-weight: 400 !important;
+}
+
+.progressContainer {
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.gantt .gantt-bars .progress {
+    margin-bottom: 0 !important;
+}
+
+.gantt-labels {
+    margin-top: 33px !important;
+}

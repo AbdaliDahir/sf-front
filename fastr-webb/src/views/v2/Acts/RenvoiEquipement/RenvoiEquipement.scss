@@ -1,0 +1,65 @@
+.adg-renvoi-equipement {
+
+  .dropPlacesType,
+  .dropPlacesForm,
+  .dropPlacesResults {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .dropPlace {
+    display: flex;
+    width: 100%;
+
+    &.found {
+      height: 500px;
+    }
+
+    &>* {
+      margin: 0 5px 0 5px;
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+    }
+
+    .esri-popup__footer.esri-popup__footer--has-actions {
+      display: none;
+    }
+  }
+
+  .formAdress {
+    min-width: 50vw;
+
+    &>label {
+      display: none;
+    }
+  }
+
+  #results {
+    overflow-y: auto;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  .flex-2 {
+    flex: 2;
+  }
+
+  .flex-3 {
+    flex: 3;
+  }
+
+  .result-card {
+    &:hover {
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.80) !important;
+    }
+
+    &.selected {
+      border-color: #26c281;
+    }
+  }
+}

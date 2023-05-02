@@ -1,0 +1,15 @@
+.refresh-icon-container {
+  width: 100%;
+  text-align: right;
+  font-size: 1.5em;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.refresh-icon-container .header-top {
+  position: fixed;
+  top: 0;
+  right: 15px;
+  z-index: 1000;
+}

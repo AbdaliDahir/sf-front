@@ -1,0 +1,23 @@
+.case-actions-v2__buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.case-actions-v2__last-diag-section{
+  text-align: center;
+}
+
+.submitButtonWrapper {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  height: 35px;
+}
+
+.submitButtonWrapper span {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

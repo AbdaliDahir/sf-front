@@ -1,0 +1,9 @@
+.acts-history-websap-modal__modal-body{
+  margin-left: 2rem;
+  label{
+    font-weight: bold;
+    &::first-letter{
+      text-transform: capitalize;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import "src/css/variables";
+
+.searchClientContainer {
+  margin-top: 3rem !important;
+  height: calc(100% - #{$header-height});
+}
+.SearchCommands{
+  &-label{
+    width: 5.75rem
+  }
+}
